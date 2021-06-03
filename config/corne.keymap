@@ -16,18 +16,6 @@
 #define NONE 0
 
 / {
-//  Homerow mod held behaviour
-    behaviors {
-        hm: homerow_mods {
-            compatible = "zmk,behavior-hold-tap";
-            label = "HOMEROW_MODS";
-            #binding-cells = <2>;
-            tapping-term-ms = <175>;
-            quick_tap_ms = <0>;
-            flavor = "tap-preferred";
-            bindings = <&kp>, <&kp>;
-        };
-    };
 
     combos {
         compatible = "zmk,combos";
@@ -50,6 +38,19 @@
             timeout-ms = <50>;
             key-positions = <40 41>;
             bindings = <&lt NAV ESC>;
+        };
+    };
+
+//  Homerow mod held behaviour
+    behaviors {
+        hm: homerow_mods {
+            compatible = "zmk,behavior-hold-tap";
+            label = "HOMEROW_MODS";
+            #binding-cells = <2>;
+            tapping-term-ms = <175>;
+            quick_tap_ms = <0>;
+            flavor = "tap-preferred";
+            bindings = <&kp>, <&kp>;
         };
     };
 
