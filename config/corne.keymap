@@ -8,11 +8,11 @@
 
 // Layer Definitions
 #define DEFAULT 0
-#define SYM 1 
+#define SYM 1
 #define NAVI 2
-#define MEDIA 3
-#define NUM 4
-#define FUNC 5
+#define NUM 3
+#define FUNC 4
+#define MIRROR 5
 #define NONE 0
 
 / {
@@ -29,62 +29,85 @@
         };
     };
 
+    combos {
+        compatible = "zmk,combos";
+        combo_func_tab_l {
+            timeout-ms = <50>;
+            key-positions = <37 38>;
+            bindings = <&lt FUNC TAB>;
+        };
+        combo_nav_esc_l {
+            timeout-ms = <50>;
+            key-positions = <36 37>;
+            bindings = <&lt NAV ESC>;
+        };
+        combo_func_tab_r {
+            timeout-ms = <50>;
+            key-positions = <39 40>;
+            bindings = <&lt FUNC TAB>;
+        };
+        combo_nav_esc_r {
+            timeout-ms = <50>;
+            key-positions = <40 41>;
+            bindings = <&lt NAV ESC>;
+        };
+    };
+
 
     keymap {
         compatible = "zmk,keymap";
 
         default_layer {
             bindings = <
-&none  &kp Q        &kp W      &kp F         &kp P          &kp B         &kp J       &kp L         &kp U         &kp Y        &kp APOS     &none
-&none  &hm LGUI A   &hm LALT R &hm LCTRL S   &hm LSHFT T    &kp G         &kp M       &hm LSHFT N   &hm LCTRL E   &hm LALT I   &hm LGUI O   &none
-&none  &kp Z        &kp X      &kp C         &kp D          &kp V         &kp K       &kp H         &kp CMMA      &kp DOT      &kp FSLH     &none
-                               &lt MEDIA ESC &lt NAVI SPACE &kp TAB       &lt SYM RET &lt NUM BSPC  &lt FUNC DEL
-// TODO: Add mouse layer when ZMK supports it
+&none  &hm LGUI Q    &hm LALT W  &hm LGUI F    &hm LALT P        &kp B         &kp J       &hm LALT L        &hm LGUI U    &hm LALT Y   &hm LGUI APOS &none
+&none  &hm LCTRL A   &hm LSHFT R &hm LCTRL S   &hm LSHFT T       &kp G         &kp M       &hm LSHFT N       &hm LCTRL E   &hm LSHFT I  &hm LCTRL O   &none
+&none  &kp Z         &kp X       &kp C         &kp D             &kp V         &kp K       &kp H             &kp CMMA      &kp DOT      &kp FSLH      &none
+                                 &lt SYM BSPC  &lt MIRROR SPACE  &lt NUM RET   &lt NUM RET &lt MIRROR SPACE  &lt SYM BSPC
             >;
         };
 
         symbols {
             bindings = <
-&trans  &kp LBRC  &kp AMPS   &kp STAR    &kp LPAR   &kp RBRC      &trans  &trans  &trans  &trans  &trans  &trans    
+&trans  &kp LBRC  &kp AMPS   &kp STAR    &kp LPAR   &kp RBRC      &trans  &trans  &trans  &trans  &trans  &trans
 &trans  &kp COLON &kp DLLR   &kp PRCNT   &kp CARET  &kp PLUS      &trans  &trans  &trans  &trans  &trans  &trans
 &trans  &kp TILDE &kp EXCL   &kp AT      &kp POUND  &kp PIPE      &trans  &trans  &trans  &trans  &trans  &trans
-                             &kp LPAR    &kp RPAR   &kp UNDER     &trans  &trans  &trans
-            >;  
+                             &trans      &trans     &trans        &trans  &trans  &trans
+            >;
         };
 
         navigation {
             bindings = <
-&trans  &trans  &trans  &trans  &trans  &trans       &kp C_AC_REDO  &kp C_AC_PASTE  &kp C_AC_COPY  &kp C_AC_CUT  &kp C_AC_UNDO  &trans
-&trans  &trans  &trans  &trans  &trans  &trans       &kp CAPS       &kp LEFT        &kp DOWN       &kp UP        &kp RIGHT      &trans
-&trans  &trans  &trans  &trans  &trans  &trans       &kp INS        &kp HOME        &kp PG_DN      &kp PG_UP     &kp END        &trans
-                        &trans  &trans  &trans       &kp RET        &kp BSPC        &kp DEL
-            >;
-        };
-
-        media_keys {
-            bindings = <
-&trans  &trans  &trans  &trans  &trans  &trans      &trans     &trans     &trans       &trans       &trans     &trans    
-&trans  &trans  &trans  &trans  &trans  &trans      &trans     &kp C_PREV &kp C_VOL_DN &kp C_VOL_UP &kp C_NEXT &trans
-&trans  &trans  &trans  &trans  &trans  &trans      &trans     &trans     &trans       &trans       &trans     &trans
-                        &trans  &trans  &trans      &kp C_STOP &kp C_PP   &kp C_MUTE
+&trans  &trans    &trans     &trans     &trans     &trans          &kp C_AC_REDO  &kp C_AC_PASTE  &kp C_AC_COPY  &kp C_AC_CUT  &kp C_AC_UNDO  &trans
+&trans  &kp LEFT  &kp DOWN   &kp UP     &kp RIGHT  &kp CAPS        &kp CAPS       &kp LEFT        &kp DOWN       &kp UP        &kp RIGHT      &trans
+&trans  &kp HOME  &kp PG_DN  &kp PG_UP  &kp END    &kp INS         &kp INS        &kp HOME        &kp PG_DN      &kp PG_UP     &kp END        &trans
+                             &trans     &trans     &trans          &kp RET        &kp BSPC        &kp DEL
             >;
         };
 
         numbers {
             bindings = <
-&trans    &kp LBKT   &kp N7   &kp N8   &kp N9    &kp RBKT      &trans  &trans  &trans  &trans  &trans  &trans    
+&trans    &kp LBKT   &kp N7   &kp N8   &kp N9    &kp RBKT      &trans  &trans  &trans  &trans  &trans  &trans
 &trans    &kp SEMI   &kp N4   &kp N5   &kp N6    &kp EQUAL     &trans  &trans  &trans  &trans  &trans  &trans
-&trans    &kp GRAVE  &kp N1   &kp N2   &kp N3    &kp BSLH      &trans  &trans  &trans  &trans  &trans  &trans    
-                             &kp DOT  &kp N0    &kp MINUS     &trans  &trans  &trans
+&trans    &kp GRAVE  &kp N1   &kp N2   &kp N3    &kp BSLH      &trans  &trans  &trans  &trans  &trans  &trans
+                              &kp DOT  &kp N0    &trans        &trans  &trans  &trans
             >;
         };
 
         function_keys {
             bindings = <
-&bt BT_SEL 0  &kp F12    &kp F7     &kp F8     &kp F9     &kp PSCRN         &trans  &trans  &trans  &trans  &trans  &bt BT_SEL 3
-&bt BT_SEL 1  &kp F11    &kp F4     &kp F5     &kp F6     &kp SLCK          &trans  &trans  &trans  &trans  &trans  &bt BT_SEL 4
-&bt BT_SEL 2  &kp F10    &kp F1     &kp F2     &kp F3     &kp PAUSE_BREAK   &trans  &trans  &trans  &trans  &trans  &bt BT_CLR
-                                    &kp K_APP  &kp SPACE  &kp TAB           &trans  &trans  &trans
+&bt BT_SEL 0  &kp LPAR   &kp F7     &kp F8     &kp F9     &kp RPAR          &trans  &trans  &trans  &trans  &trans  &bt BT_SEL 3
+&bt BT_SEL 1  &kp UNDER  &kp F4     &kp F5     &kp F6     &kp MINUS         &trans  &trans  &trans  &trans  &trans  &bt BT_SEL 4
+&bt BT_SEL 2  &kp F10    &kp F1     &kp F2     &kp F3     &kp PSCRN         &trans  &trans  &trans  &trans  &trans  &bt BT_CLR
+                                    &trans     &trans     &trans            &trans  &trans  &trans
+            >;
+        };
+
+        mirror {
+            bindings = <
+&none  &hm LGUI APOS &hm LALT Y  &hm LGUI U    &hm LALT L        &kp J         &kp B       &hm LALT P        &hm LGUI F    &hm LALT W   &hm LGUI Q    &none
+&none  &hm LCTRL O   &hm LSHFT I &hm LCTRL E   &hm LSHFT N       &kp M         &kp G       &hm LSHFT T       &hm LCTRL S   &hm LSHFT R  &hm LCTRL A   &none
+&none  &kp FSLH      &kp DOT     &kp CMMA      &kp H             &kp K         &kp V       &kp D             &kp C         &kp X        &kp Z         &none
+                                 &lt SYM BSPC  &lt MIRROR SPACE  &lt NUM RET   &lt NUM RET &lt MIRROR SPACE  &lt SYM BSPC
             >;
         };
     };
